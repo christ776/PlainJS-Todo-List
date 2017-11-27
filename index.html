@@ -7,28 +7,28 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link rel="stylesheet" href="main.css">
   </head>
-  <body onload="addEventListeners()">
+  <body onload="init()">
     <div id='main_container' class="container-fluid">
         <h2 class="text-center bg-warning">My Notes</h2>
         <div class="input-group">
           <span class="input-group-addon" id="basic-addon1">I want to..</span>
           <input type="text" class="form-control" placeholder="Add New note" aria-describedby="basic-addon1" id="addNote">
         </div>
-        <div class="pt-2 pb-2" id="notes">
-          <div class="container-fluid">
-            <div class="row bg-primary rounded text-white">
+        <div class="pt-2 pb-2">
+          <div class="container-fluid" id="notes">
+            <!-- <div class="row bg-primary rounded text-white">
               <div class="col">
-                <div style="font-size:35px"> HAcer cosas </div>
+                <div style="font-size:30px"> HAcer cosas </div>
               </div>
               <div class="col-xs-auto">
                   <button type="button" class="btn btn-secondary">Edit</button>
                   <button type="button" class="btn btn-danger">Delete</button>
-                </div>
-            </div>
+              </div>
+            </div> -->
           </div>
-          </div>
-           
+        </div>   
     </div>
     <script src="main.js"></script>
+    <script src="http://chancejs.com/chance.min.js"></script>
   </body>
 </html>

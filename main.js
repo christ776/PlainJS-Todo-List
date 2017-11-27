@@ -1,3 +1,8 @@
+function init() {
+    addEventListeners()
+    fecthIssues();
+}
+
 function addEventListeners() {
     const input = document.getElementById("addNote");
     input.addEventListener('keydown', function(event) {
@@ -13,43 +18,56 @@ function addEventListeners() {
   });
 }
 
-function addNote(note) {
-    let notes = document.getElementById('notes');
-    var textNode = document.createTextNode(note);
+function fecthIssues() {
+    const issues = JSON.parse(localStorage.getItem('issues'));
+    issues.forEach(element => {
+        renderIssue(element);
+    });
+}
+
+function renderIssue(issue) {
+    let parent = document.getElementById('notes');
     var div = document.createElement('div');
-    div.className = "row bg-primary rounded";
-    div.appendChild(columnWithChild(headerTitle(note)));
-    let buttons = columnWithChild()
-    div.appendChild(editNoteButton());
-    div.appendChild(deleteNoteButton());
-    notes.appendChild(div);
+
+    div.innerHTML =  
+    `<div class="row bg-primary rounded text-white mt-2">
+        <div class="col">
+            <div style="font-size:30px"> ${issue.description} </div>
+        </div>
+        <div class="col-xs-auto">
+            <button type="button" class="btn btn-secondary" onclick="editTask(${issue.id})">Edit</button>
+            <button type="button" class="btn btn-danger" onclick="deleteTask(${issue.id})">Delete</button>
+      </div>
+    </div>`
+    parent.appendChild(div);
 }
 
-function columnWithChild(child) {
-    let column = document.createElement('div');
-    column.className = "col col-lg-2";
-    column.appendChild(child);
-    return column;
+function editTask(taskId) {
+
 }
 
-function headerTitle(title) {
-    let header = document.createElement('h2');
-    header.textContent = title;
-    return header;
+function deleteTask(taskId) {
+
 }
 
-function deleteNoteButton() {
-    let button = document.createElement('button');
-    button.type = 'button'
-    button.className = 'btn btn-primary btn-sm';
-    button.textContent = 'Edit';
-    return button;
+function addNote(note) {
+    const issue = {
+        id: chance.guid(),
+        description: note,
+    }
+    saveToLocalStorage(issue);
+    renderIssue(issue);
 }
 
-function editNoteButton() {
-    let button = document.createElement('button');
-    button.type = 'button'
-    button.className = 'btn btn-danger btn-sm';
-    button.textContent = 'Remove';
-    return button;
+function saveToLocalStorage (issue) {
+
+    if (localStorage.getItem('issues') === null) {
+        let issues = [];
+        issues.push(issue);
+        localStorage.setItem('issues', JSON.stringify(issues));
+    } else {
+        let issues = JSON.parse(localStorage.getItem('issues'));
+        issues.push(issue);
+        localStorage.setItem('issues', JSON.stringify(issues));
+    }
 }
