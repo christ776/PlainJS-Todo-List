@@ -26,3 +26,100 @@ h2 {
     margin-bottom: 5px; 
     margin-right: 5px;
 }
+
+.task-edition:focus
+{
+    border: none !important;
+    color: wheat;
+    background-color: transparent !important;
+}
+
+.task-edition {
+    border: none;
+    box-shadow: none;
+    color: white;
+    background-color: transparent;
+}
+
+.task-edition::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: wheat;
+}
+
+.task-edition::-moz-placeholder { /* Firefox 19+ */
+    color: wheat;
+}
+
+.mdi::before {
+    font-size: 24px;
+    line-height: 14px;
+}
+.btn .mdi::before {
+    position: relative;
+    top: 4px;
+}
+.btn-xs .mdi::before {
+    font-size: 18px;
+    top: 3px;
+}
+.btn-sm .mdi::before {
+    font-size: 18px;
+    top: 3px;
+}
+.dropdown-menu .mdi {
+    width: 18px;
+}
+.dropdown-menu .mdi::before {
+    position: relative;
+    top: 4px;
+    left: -8px;
+}
+.nav .mdi::before {
+    position: relative;
+    top: 4px;
+}
+.navbar .navbar-toggle .mdi::before {
+    position: relative;
+    top: 4px;
+    color: #FFF;
+}
+.breadcrumb .mdi::before {
+    position: relative;
+    top: 4px;
+}
+.breadcrumb a:hover {
+    text-decoration: none;
+}
+.breadcrumb a:hover span {
+    text-decoration: underline;
+}
+.alert .mdi::before {
+    position: relative;
+    top: 4px;
+    margin-right: 2px;
+}
+.input-group-addon .mdi::before {
+    position: relative;
+    top: 3px;
+}
+.navbar-brand .mdi::before {
+    position: relative;
+    top: 2px;
+    margin-right: 2px;
+}
+.list-group-item .mdi::before {
+    position: relative;
+    top: 3px;
+    left: -3px
+}
+
+.btn--icon {
+    border-radius: 40px;
+    padding: 8px;
+    width: 40px;
+    height: 40px;
+}
+
+.completed {
+    text-decoration: line-through;
+    text-decoration-color: red;
+}
