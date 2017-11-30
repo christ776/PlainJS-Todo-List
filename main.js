@@ -1,5 +1,3 @@
-let issues = [];
-
 function init() {
     addEventListeners()
     fecthIssues();
@@ -15,7 +13,7 @@ function addEventListeners() {
           addTask(value);
       }
       if (event.key === "Escape") {
-          console.log("Escape key pressed");
+          event.target.value = '';
       }
       if (event.type === 'onclick') {
           event.target.value = '';
@@ -24,13 +22,13 @@ function addEventListeners() {
 }
 
 function fecthIssues() {
-    const storedIssues = JSON.parse(localStorage.getItem('issues'));
+    const storedIssues = fetchStoredTasks();
     if (storedIssues === null) {
         return;
     }
     let parent = document.getElementById('notes');
-    this.issues = [...storedIssues];
-    this.issues.forEach(task => {
+    tasks = [...storedIssues];
+    tasks.forEach(task => {
         const taskId = task.id;
         var taskElement = document.createElement('div');
         renderTask(task,taskElement)
@@ -48,8 +46,8 @@ function addTask(taskDescription) {
         description: taskDescription,
         completed: false
     }
-    saveToLocalStorage(task);
-    this.issues.push(task);
+    tasks.push(task);
+    updateStoredTasks();
     let parent = document.getElementById('notes');
     var taskElement = document.createElement('div');
     parent.appendChild(taskElement);
@@ -67,7 +65,8 @@ function renderTask(task,element) {
     element.id = task.id;
     element.innerHTML =  
     `<div class="row bg-primary rounded text-white mt-2">
-        <div class="col ${task.completed === true ? 'completed': ''}">
+        <div onclick="editTask('${taskId}','${task.description}')"
+        class="col ${task.completed === true ? 'completed': ''}">
             <div style="font-size:30px">
             <span class="material-icons md-inactive" 
                 onclick="completeTask('${taskId}')">
@@ -99,7 +98,7 @@ function renderTask(task,element) {
  */
 function completeTask(taskId) {
     console.log(`Task ${taskId} has been completed`);
-    const updatedIssues = this.issues.map( (task) => {
+    const updatedIssues = tasks.map( (task) => {
         if (task.id === taskId) {
             let copy = Object.assign({},task);
             copy.completed = true;
@@ -108,7 +107,7 @@ function completeTask(taskId) {
         return task;
     });
 
-    this.issues = [...updatedIssues];
+    tasks = [...updatedIssues];
     const updatedTasks = updatedIssues.filter( (task) => {
         return task.id === taskId;
     });
@@ -116,7 +115,6 @@ function completeTask(taskId) {
         const taskElement = document.getElementById(taskId);
         renderTask(updatedTasks[0],taskElement);
     }
-    console.log(updatedIssues);
 }
 
 /**
@@ -130,6 +128,7 @@ function editTask(taskId,description) {
 
     //Edit mode
     let editrow = document.createElement('div');
+    editrow.id = taskId;
     editrow.innerHTML =  
     `<div class="row bg-primary rounded text-white mt-2">
         <div class="col-12">
@@ -138,7 +137,9 @@ function editTask(taskId,description) {
             class="form-control task-edition" 
             type="text" 
             autofocus 
-            defaultValue="${description}">
+            maxLength="64"
+            onKeyUp= "handleKeyUp('${taskId}')"
+            value="${description}">
         </div>
     </div>`
     parent.replaceChild(editrow,task);
@@ -147,21 +148,46 @@ function editTask(taskId,description) {
     // inputField.selectionEnd = elemLen;
 }
 
+// function endEditingTask(taskId) {
+//     const task = document.getElementById(taskId);
+//     let parent = document.getElementById('notes');
+//     //renderTask()
+
+// }
+
+function handleKeyUp (taskId) {
+    if (event.key === "Enter") {
+        // Do work
+        console.log('Finished Editing')
+        const updatedTasks = tasks.map( (task) => {
+            if (task.id === taskId) {
+                let copy = Object.assign({},task);
+                copy.description = event.target.value;
+                return copy;
+            }
+            return task;
+        });
+        tasks = [...updatedTasks];
+        refreshTask(taskId);
+        updateStoredTasks();
+    }
+    if (event.key === "Escape") {
+       refreshTask(taskId);
+    }
+}
+
+function refreshTask(taskId) {
+    const task = tasks.filter((task) => {
+        return task.id === taskId;
+    })[0];
+    if (task != null && task != undefined) {
+        const taskElement = document.getElementById(taskId);
+        renderTask(task, taskElement);
+    }
+}
+
 function deleteTask(taskId) {
     const task = document.getElementById(taskId);
     let parent = document.getElementById('notes');
     parent.removeChild(task);
-}
-
-function saveToLocalStorage (issue) {
-
-    if (localStorage.getItem('issues') === null) {
-        let issues = [];
-        issues.push(issue);
-        localStorage.setItem('issues', JSON.stringify(issues));
-    } else {
-        let issues = JSON.parse(localStorage.getItem('issues'));
-        issues.push(issue);
-        localStorage.setItem('issues', JSON.stringify(issues));
-    }
 }
