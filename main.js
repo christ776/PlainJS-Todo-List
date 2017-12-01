@@ -142,7 +142,7 @@ function editTask(taskId,description) {
             type="text" 
             autofocus 
             maxLength="64"
-            onKeyUp= "handleKeyUp('${taskId}')"
+            onKeyUp= "handleKeyUp('${taskId}',event)"
             value="${description}">
         </div>
     </div>`
@@ -159,7 +159,7 @@ function editTask(taskId,description) {
 
 // }
 
-function handleKeyUp (taskId) {
+function handleKeyUp (taskId,event) {
     if (event.key === "Enter") {
         // Do work
         console.log('Finished Editing')

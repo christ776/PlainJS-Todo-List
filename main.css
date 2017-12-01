@@ -120,8 +120,10 @@ h2 {
 }
 
 .completed {
+    text-decoration-style: dotted;
     text-decoration: line-through;
     text-decoration-color: rgb(255, 0, 128);
+    -webkit-text-decoration-color: rgb(255, 0, 128);
 }
 
 .task-item__button {
