@@ -121,5 +121,21 @@ h2 {
 
 .completed {
     text-decoration: line-through;
-    text-decoration-color: red;
+    text-decoration-color: rgb(255, 0, 128);
+}
+
+.task-item__button {
+    margin-left: 5px;
+    background: whitesmoke;
+    color: rgb(54, 194, 41); 
+}
+
+.task-item__button:hover {
+    color: rgb(153, 153, 153); 
+}
+.task-item__button:active {
+    background:wheat; 
+}
+.task-item__button.active {
+    color: #85bf6b; 
 }

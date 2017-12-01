@@ -65,13 +65,17 @@ function renderTask(task,element) {
     element.id = task.id;
     element.innerHTML =  
     `<div class="row bg-primary rounded text-white mt-2">
-        <div onclick="editTask('${taskId}','${task.description}')"
-        class="col ${task.completed === true ? 'completed': ''}">
-            <div style="font-size:30px">
-            <span class="material-icons md-inactive" 
-                onclick="completeTask('${taskId}')">
+        <div class="col-xs-auto">
+            <button class="btn btn--icon task-item__button" type="button" onclick="completeTask('${taskId}')">
+            <span class="material-icons">
                 done
             </span>
+        </button>
+        </div>
+        <div onclick="editTask('${taskId}','${task.description}')"
+        class="col">
+            <div class="${task.completed === true ? 'completed': ''}"
+             style="font-size:30px">
              ${task.description} </div>
         </div>
         <div class="col-xs-auto">
