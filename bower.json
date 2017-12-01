@@ -1,0 +1,20 @@
+{
+  "name": "Todo-List",
+  "description": "A vanilla JS To Do List",
+  "main": "index.html",
+  "authors": [
+    "Christian De Martino <chrisddm@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/christ776/PlainJS-Todo-List",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "chance": "^1.0.12"
+  }
+}
