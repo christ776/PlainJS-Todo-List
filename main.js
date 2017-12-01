@@ -152,13 +152,6 @@ function editTask(taskId,description) {
     // inputField.selectionEnd = elemLen;
 }
 
-// function endEditingTask(taskId) {
-//     const task = document.getElementById(taskId);
-//     let parent = document.getElementById('notes');
-//     //renderTask()
-
-// }
-
 function handleKeyUp (taskId,event) {
     if (event.key === "Enter") {
         // Do work
