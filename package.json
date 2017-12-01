@@ -1,13 +1,13 @@
 {
-    "name": "my-static-site",
-    "version": "1.0.0",
-    "description": "This will load any static html site",
-    "scripts": {
-      "start": "harp server --port $PORT",
-      "postinstall": "bower install"
-    },
-    "dependencies": {
-      "harp": "*"
-    }
+  "name": "my-static-site",
+  "version": "1.0.0",
+  "description": "This will load any static html site",
+  "scripts": {
+    "start": "harp server --port $PORT",
+    "postinstall": "bower install"
+  },
+  "dependencies": {
+    "bower": "^1.8.2",
+    "harp": "*"
+  }
 }
-  
